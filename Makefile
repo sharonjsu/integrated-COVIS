@@ -1,9 +1,9 @@
 CXX = g++
 CXXFLAGS = -std=c++0x -Wall -pedantic-errors -g
 
-SRCS =  main.cpp neurons.cpp IZK.cpp
+SRCS =  main.cpp neurons.cpp IZK.cpp network.cpp
 OBJS = ${SRCS:.cpp=.o}
-HEADERS = neurons.h IZK.h
+HEADERS = neurons.h IZK.h network.h
 
 MAIN = output
 

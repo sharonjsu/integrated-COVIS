@@ -26,10 +26,10 @@ public:
 
 
 
-/*
+
 	// Consider using a vector of pointers for input.
 	// might be better in network.h, or better yet, implemented
 	Neuron* input1=NULL;
-	Neuron* input2=NULL;*/
+	Neuron* input2=NULL;
 };
 
