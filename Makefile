@@ -8,7 +8,7 @@ HEADERS = neurons.h IZK.h
 MAIN = output
 
 all: ${MAIN}
-		@echo   Simple compilter named myprog has been compiled
+		@echo   Woo hoo it compiled
 
 ${MAIN}: ${OBJS}
 		${CXX} ${CXXFLAGS} ${OBJS} -o ${MAIN}
