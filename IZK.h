@@ -9,7 +9,7 @@ public:
 	double b;
 	double c;
 	double d;
-	double u[3000];
+	double u[3000]={0};
 	double cort_weights[100][100];
 	bool isMSN;
 	//double v[];

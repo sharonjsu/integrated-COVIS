@@ -2,7 +2,6 @@
 #define NEURONS_H
 #include <iostream>
 #include <cmath>
-#include <vector>
 using namespace std;
 
 
@@ -15,14 +14,17 @@ public:
 	double vthresh;
 	double vpeak;
 	double vrest;
-	vector<double> u;
-	vector<double> I; // CONSIDER CHANGING TO VECTORS
-	vector<double> v;
-	//double updated_weight();
-	//double S(double v[3000]);
+	double I[3000]; // changed to arrays
+	double v[3000];
+
+	double updated_weight(double w, double D_n, double I, double S, double D_base, double a,
+        double b, double g, double tN, double tA, double w_max);
+	double S(double v[3000]);
 	//void add_alpha_function(int i, double weight, double lambda, double pre_peak);
-	void reset();
-	//double max(double a, double b);
+	// void reset();
+	double max(double a, double b);
+
+
 
 /*
 	// Consider using a vector of pointers for input.
