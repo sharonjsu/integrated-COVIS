@@ -2,16 +2,18 @@
 //#include "neurons.h"
 //Constructor for non-MSN IZK neuron
 IZK::IZK(){
-		memCapacitance=100; 
-		vrest=-60; 
-		vthresh=-40; 
-		k=0.7; 
-		a=0.03;
-		b=-2;
-		c=-50;
-		d=100;
-		vpeak=35;
-		isMSN=false;
+		int memCapacitance=100; 
+		int vrest=-60; 
+		int vthresh=-40; 
+		double k=0.7; 
+		double a=0.03;
+		double b=-2;
+		double c=-50;
+		double d=100;
+		double vpeak=35;
+		bool isMSN=false;
+		//double v[t] = {};
+
 	}	
 //Constructor for MSN IZK neuron
 IZK::IZK(bool msn){
@@ -26,6 +28,7 @@ IZK::IZK(bool msn){
 	d=150;
 	vpeak=40;
 }
+//same as euler_step_v_noise
 double IZK::euler_step_v(int i, double noise){
 	double step = v[i] + (k*(v[i]-vrest)*(v[i]-vthresh)-u[i]+(I[i]+noise))/memCapacitance;
 	return step;
@@ -36,11 +39,12 @@ double IZK::euler_step_u(int i){
     return step;
 }
 
-// void IZK::add_alpha_function(int i, double weight, double lambda, double pre_peak){
-//     for (int j=i; j<3000; j++){
-//         I[j] += weight*pre_peak*exp((lambda+(j-i))/lambda)*(i-j)/lambda;
-//     }
-// } 
+
+ void IZK::add_alpha_function(int i, double weight, double lambda, double pre_peak){
+     for (int j=i; j<3000; j++){
+         I[j] += weight*pre_peak*exp((lambda+(j-i))/lambda)*(i-j)/lambda;
+     }
+ } 
 
 //Constructor for QIF  neuron
 QIF::QIF(){
@@ -53,11 +57,11 @@ QIF::QIF(){
 }
 
 
-// void QIF::add_alpha_function(int i, double weight, double lambda, double pre_peak){
-//     for (int j=i; j<3000; j++){
-//         I[j] = I[j] + weight*pre_peak*exp((lambda+(j-i))/lambda)*(i-j)/lambda;
-//     }
-// }
+ void QIF::add_alpha_function(int i, double weight, double lambda, double pre_peak){
+     for (int j=i; j<3000; j++){
+         I[j] = I[j] + weight*pre_peak*exp((lambda+(j-i))/lambda)*(i-j)/lambda;
+     }
+ }
 
 double QIF::euler_step_v(int i, double noise){
 	double step = v[i] + gamma*(v[i]-vrest)*(v[i]-vthresh) + beta + (I[i]+noise);	

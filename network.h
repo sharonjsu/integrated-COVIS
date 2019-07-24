@@ -6,7 +6,7 @@
 
 using namespace std;
 
-//Consider removing, is unnecessary.
+//class that will have different models.
 //Make sure you model this code after the python code; not the c code...
 class network{
 public:
@@ -16,6 +16,13 @@ public:
 	Neuron* end1ptr;
 	Neuron* end2ptr;
 	DA_sys* dopamine;
+
+	void oneStage();
+	void twoStage();
+	void oneTANS();
+	//add automaticity in later.
+
+
 	void createNet(); // change this to a constructor later
 	void addNeuron(Neuron* ptr, string type) // ptr and type of neuron/neuron parameters
 	void oneTrial(); // will use update weights.
@@ -36,5 +43,4 @@ struct DA_sys{
 	// double predicted_reward();
 	// double obtained_reward(); //probably put in network
 	// double D();
-
 }
