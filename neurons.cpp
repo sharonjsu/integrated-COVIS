@@ -6,6 +6,7 @@ Neuron::Neuron(){
 		v[i] = vrest;
 		I[i]= 0;
 	}
+	cout<<"Neuron created with type ";
 }
 
 // void Neuron::reset(){

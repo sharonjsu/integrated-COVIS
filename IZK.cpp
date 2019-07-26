@@ -13,6 +13,7 @@ IZK::IZK(){
 		double vpeak=35;
 		bool isMSN=false;
 		//double v[t] = {};
+		cout <<"IZK"<<endl;
 
 	}	
 //Constructor for MSN IZK neuron
@@ -39,7 +40,9 @@ double IZK::euler_step_u(int i){
     return step;
 }
 
-
+// int IZK::getType(){
+// 	return 1;
+// }
  void IZK::add_alpha_function(int i, double weight, double lambda, double pre_peak){
      for (int j=i; j<3000; j++){
          I[j] += weight*pre_peak*exp((lambda+(j-i))/lambda)*(i-j)/lambda;
@@ -54,6 +57,17 @@ QIF::QIF(){
 	vthresh=-40.0;
 	vpeak=35;
 	vreset=-50;
+	cout<<"QIF"<<endl;
+}
+
+QIF::QIF(double betaSet){
+	beta=betaSet;
+	gamma=0.117;
+	vrest=-60.0;
+	vthresh=-40.0;
+	vpeak=35;
+	vreset=-50;
+	cout<<"QIF with beta "<< beta<<endl;
 }
 
 
@@ -67,3 +81,6 @@ double QIF::euler_step_v(int i, double noise){
 	double step = v[i] + gamma*(v[i]-vrest)*(v[i]-vthresh) + beta + (I[i]+noise);	
 	return step;
 }
+// int QIF::getType(){
+// 	return 2;
+// }

@@ -26,14 +26,16 @@ public:
 	Neuron* end1ptr;
 	Neuron* end2ptr;
 	DA_sys* dopamine;
-	void addConnection(Neuron* outputNeuron, Neuron* target);
+	void addConnection(Neuron* outputNeuron, Neuron* target, double weight, double lambda);
+	void setHead(Neuron* headNeuron, int whichIndex);
+	void gaussian_stimulation(int stim_i, int stim_j, double amp, double cons, double a[100][100]);
+	double cortex_in(double cort_input[100][100], double cort_weights[100][100]);
+
 	// void oneStage();
 	// void twoStage();
 	// void oneTANS();
 	// //add automaticity in later.
 
-
-	// void createNet(); // change this to a constructor later
 	// void addNeuron(Neuron* ptr, string type) // ptr and type of neuron/neuron parameters
 	// void oneTrial(); // will use update weights.
 	// void updateWeights(); //updates all weights at once

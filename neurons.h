@@ -1,4 +1,4 @@
-
+#ifndef NEURONS_H
 #define NEURONS_H
 #include <iostream>
 #include <cmath>
@@ -29,7 +29,11 @@ public:
 
 	// Consider using a vector of pointers for input.
 	// might be better in network.h, or better yet, implemented
-	Neuron* input1=NULL;
-	Neuron* input2=NULL;
+	Neuron* input1 = NULL;
+	double weight1 = 0.0;
+	double lambda1 = 0.0;
+	Neuron* input2 = NULL;
+	double weight2 = 0.0;
+	double lambda2 = 0.0;
 };
-
+#endif
