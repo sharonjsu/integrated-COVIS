@@ -9,11 +9,13 @@ Neuron::Neuron(){
 	cout<<"Neuron created with type ";
 }
 
-// void Neuron::reset(){
-// 	fill(this->v.begin(), this->v.end(), this->vrest);
-// 	fill(this->u.begin(), this->u.end(), 0.0);
-// 	fill(this->I.begin(), this->I.end(), 0.0);
-// }
+void Neuron::reset(){
+	cout<<"Calling reset from neuron rather than overwritten function"<<endl;
+}
+
+void Neuron::reset(double ok){
+	cout<<"Calling reset from neuron (DOUBLEOK) rather than overwritten function"<<endl;
+}
 
 double max(double a, double b){
     if (a >= b){

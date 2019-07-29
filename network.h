@@ -44,6 +44,7 @@ public:
 	// void updateWeights(); //updates all weights at once
 
 	//DA stuff
+	
 
 	double predicted_reward(DA_sys d);
 	double obtained_reward(char f); //probably put in network

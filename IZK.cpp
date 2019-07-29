@@ -2,22 +2,37 @@
 //#include "neurons.h"
 //Constructor for non-MSN IZK neuron
 IZK::IZK(){
-		int memCapacitance=100; 
-		int vrest=-60; 
-		int vthresh=-40; 
-		double k=0.7; 
-		double a=0.03;
-		double b=-2;
-		double c=-50;
-		double d=100;
-		double vpeak=35;
-		bool isMSN=false;
+		memCapacitance=100.0; 
+		Neuron::vrest=-60; 
+		Neuron::vthresh=-40; 
+		k=0.7; 
+		a=0.03;
+		b=-2;
+		c=-50;
+		d=100;
+		Neuron::vpeak=35;
+		isMSN=false;
 		//double v[t] = {};
 		cout <<"IZK"<<endl;
 
 	}	
+IZK::IZK(string neuronType){
+		memCapacitance=100.0; 
+		Neuron::vrest=-60; 
+		Neuron::vthresh=-40; 
+		k=0.7; 
+		a=0.03;
+		b=-2;
+		c=-50;
+		d=100;
+		Neuron::vpeak=35;
+		isMSN=false;
+		//double v[t] = {};
+		Neuron::name = neuronType;
+		cout <<"IZK "<<Neuron::name<<endl;
+	}
 //Constructor for MSN IZK neuron
-IZK::IZK(bool msn){
+IZK::IZK(bool msn, string neuronType){
 	isMSN=msn;
 	memCapacitance=50;
 	vrest=-80;
@@ -28,15 +43,47 @@ IZK::IZK(bool msn){
 	c=-55;
 	d=150;
 	vpeak=40;
+	Neuron::name = neuronType;
+	cout <<"IZK "<<Neuron::name<<endl;
 }
+
+void IZK::reset(double stim){
+	cout<<"resetting "<< Neuron::name<<", stim: "<<stim <<endl;
+	for (int bins=0;bins<3000;bins++){
+		Neuron::v[bins] = vrest;
+		u[bins] = 0;
+		//cout<<vrest<<" "<<Neuron::v[bins]<<" ";
+		if (bins<500){
+		    Neuron::I[bins] = 0;
+		}
+		else {
+		    Neuron::I[bins] = stim;
+		}
+	}
+	cout<<endl;
+}
+
+void IZK::reset(){
+	for (int bins = 0; bins<3000; bins++){
+		Neuron::v[bins] = vrest;
+		Neuron::I[bins]=0;
+		u[bins]=0;
+	}
+	cout<<"reset "<<Neuron::name<<" with izk fx"<<endl;
+}
+
 //same as euler_step_v_noise
 double IZK::euler_step_v(int i, double noise){
-	double step = v[i] + (k*(v[i]-vrest)*(v[i]-vthresh)-u[i]+(I[i]+noise))/memCapacitance;
+	double step = Neuron::v[i] + (k*(Neuron::v[i]-Neuron::vrest)*(Neuron::v[i]-Neuron::vthresh)-u[i]+(Neuron::I[i]+noise))/memCapacitance;
+	//cout<< memCapacitance<<endl;
+	Neuron::v[i+1] = step;
 	return step;
 }
 
 double IZK::euler_step_u(int i){
-    double step = u[i] + a*(b*(v[i]-vrest)-u[i]);
+    double step = u[i] + a*(b*(Neuron::v[i]-Neuron::vrest)-u[i]);
+    //cout<< a <<" "<< k <<" "<< b <<" "<< u[i]<<endl;
+    u[i+1] = step;
     return step;
 }
 
@@ -60,14 +107,34 @@ QIF::QIF(){
 	cout<<"QIF"<<endl;
 }
 
-QIF::QIF(double betaSet){
+QIF::QIF(string neuronType){
+	beta=11.85;
+	gamma=0.117;
+	vrest=-60.0;
+	vthresh=-40.0;
+	vpeak=35;
+	vreset=-50;
+	Neuron::name = neuronType;
+	cout <<"QIF "<<Neuron::name<<endl;
+}
+
+QIF::QIF(double betaSet, string neuronType){
 	beta=betaSet;
 	gamma=0.117;
 	vrest=-60.0;
 	vthresh=-40.0;
 	vpeak=35;
 	vreset=-50;
-	cout<<"QIF with beta "<< beta<<endl;
+	Neuron::name = neuronType;
+	cout <<"QIF "<<Neuron::name<<endl;
+}
+void QIF::reset(){
+	for (int bins = 0; bins<3000; bins++){
+		Neuron::v[bins] = vrest;
+		Neuron::I[bins]=0;
+	}
+	cout<<"reset "<<Neuron::name<<" with qif fx"<<endl;
+
 }
 
 
