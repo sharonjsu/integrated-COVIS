@@ -160,8 +160,22 @@ int main(){
 			for (vector<shared_ptr<IZK>>::iterator it = izklist.begin() ; it != izklist.end(); ++it){
 				cout<< "v: "<<(*it)->euler_step_v(t,gaus_dist(generator))<<" ";
 				cout<< "u: "<<(*it)->euler_step_u(t)<<endl;
-				//if((*it)->v[t+1])
+				if((*it)->v[t+1] >= (*it)->vpeak){
+					(*it)->v[t]=(*it)->vpeak;
+					(*it)->v[t+1] = (*it)->c;
+					(*it)->u[t+1]=(*it)->u[t+1] + (*it)->d;
+				}
 			}
+			for (vector<shared_ptr<QIF>>::iterator it = qiflist.begin() ; it != qiflist.end(); ++it){
+				cout<<"v: "<<(*it)->euler_step_v(t)<<endl;
+				if((*it)->v[t+1] >= (*it)->vpeak){
+					(*it)->v[t] = (*it)->vpeak;
+					(*it)->v[t+1] = (*it)->vreset;
+				}
+
+			}
+			
+
 		}
 	}
 
