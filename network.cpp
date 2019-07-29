@@ -3,15 +3,32 @@
 #include "network.h"
 using namespace std;
 #include <map>
+#include<random>
+
+DA_sys::DA_sys(){
+}
 
 network::network(){
 	head1ptr = NULL;
-	end1ptr= NULL;
+	end1ptr = NULL;
 	head2ptr= NULL;
 	end2ptr = NULL;
-	dopamine =NULL;
-}
+	dopamine = new DA_sys();
+	 // initialize sensory cortex weights
+	initializeCortWeights();
+} 
 
+void network::initializeCortWeights(){
+	default_random_engine generator;
+	uniform_real_distribution<double> distribution(0.0,1.0);
+	for (int i=0; i<100; i++){
+        for (int j=0; j<100; j++){
+            a_sensory_weights[i][j] = 0.1 + 0.1*distribution(generator);
+            b_sensory_weights[i][j] = 0.1 + 0.1*distribution(generator);
+            //cout<< i<<":"<<j<<" A: "<<a_sensory_weights[i][j]<<" B: "<<b_sensory_weights[i][j]<<endl;
+        }
+    }
+}
 void network::setHead(Neuron* headNeuron, int whichIndex){
 	if (whichIndex == 1){
 		head1ptr = headNeuron;

@@ -14,6 +14,7 @@ struct DA_sys{
 	// double predicted_reward();
 	// double obtained_reward(); //probably put in network
 	// double D();
+
 };
 
 //class that will have different models.
@@ -26,11 +27,13 @@ public:
 	Neuron* end1ptr;
 	Neuron* end2ptr;
 	DA_sys* dopamine;
+	double a_sensory_weights[100][100];
+	double b_sensory_weights[100][100];
 	void addConnection(Neuron* outputNeuron, Neuron* target, double weight, double lambda);
 	void setHead(Neuron* headNeuron, int whichIndex);
 	void gaussian_stimulation(int stim_i, int stim_j, double amp, double cons, double a[100][100]);
 	double cortex_in(double cort_input[100][100], double cort_weights[100][100]);
-
+	void initializeCortWeights();
 	// void oneStage();
 	// void twoStage();
 	// void oneTANS();
